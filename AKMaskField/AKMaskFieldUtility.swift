@@ -39,7 +39,8 @@ public class AKMaskFieldUtility {
         guard let sourceString = sourceString else {
             return ""
         }
-        return sourceString.substring(with: rangeFromString(sourceString, nsRange: range))
+        let range = rangeFromString(sourceString, nsRange: range)!
+        return String(sourceString[range.lowerBound...range.upperBound])
     }
     
     public class func replace(_ sourceString: inout String!, withString string: String, inRange range: NSRange) {
@@ -61,13 +62,13 @@ public class AKMaskFieldUtility {
     public class func matchesInString(_ string: String, pattern: String) -> [NSTextCheckingResult] {
         return  try!
             NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-                .matches(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.characters.count))
+                .matches(in: string, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, string.count))
     }
     
     public class func findIntersection(_ ranges: [NSRange], withRange range: NSRange) -> [NSRange?] {
         
         var intersectRanges = [NSRange?]()
-        
+         
         for r in ranges {
             
             var intersectRange: NSRange!
