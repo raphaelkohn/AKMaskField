@@ -40,7 +40,7 @@ public class AKMaskFieldUtility {
             return ""
         }
         let range = rangeFromString(sourceString, nsRange: range)!
-        return String(sourceString[range.lowerBound...range.upperBound])
+        return String(sourceString[range.lowerBound..<range.upperBound])
     }
     
     public class func replace(_ sourceString: inout String!, withString string: String, inRange range: NSRange) {
